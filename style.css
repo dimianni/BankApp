@@ -1,9 +1,3 @@
-/*
- * Use this CSS to learn some intersting techniques,
- * in case you're wondering how I built the UI.
- * Have fun! 😁
- */
-
 * {
   margin: 0;
   padding: 0;
@@ -17,8 +11,14 @@ html {
 
 body {
   font-family: "Poppins", sans-serif;
-  color: #444;
-  background-color: #f3f3f3;
+  color: #fff;
+  background: rgb(131, 58, 180);
+  background: linear-gradient(
+    90deg,
+    rgba(131, 58, 180, 0.7581233176864496) 4%,
+    rgba(162, 29, 253, 0.6740897042410714) 50%,
+    rgba(69, 114, 252, 0.772128919927346) 100%
+  );
   height: 100vh;
   padding: 2rem;
 }
@@ -52,18 +52,21 @@ nav {
   width: 12rem;
   border-radius: 10rem;
   margin-right: 1rem;
-  color: inherit;
-  border: 1px solid #fff;
+  color: #333;
   transition: all 0.3s;
 }
 
 .login__input:focus {
   outline: none;
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
 }
 
 .login__input::placeholder {
   color: #bbb;
+}
+
+.login__input:focus::placeholder {
+  color: #fff;
 }
 
 .login__btn {
@@ -80,7 +83,7 @@ nav {
 .btn--sort:hover,
 .btn--sort:focus {
   outline: none;
-  color: #777;
+  opacity: 0.6;
 }
 
 /* MAIN */
@@ -114,7 +117,8 @@ nav {
 
 .balance__date {
   font-size: 1.4rem;
-  color: #888;
+  color: #fff;
+  opacity: 0.6;
 }
 
 .balance__value {
@@ -165,6 +169,7 @@ nav {
 .movements__value {
   font-size: 1.7rem;
   margin-left: auto;
+  color: #333;
 }
 
 /* SUMMARY */
@@ -181,6 +186,7 @@ nav {
   font-weight: 500;
   text-transform: uppercase;
   margin-right: 0.8rem;
+  opacity: 0.6;
 }
 
 .summary__value {
@@ -190,11 +196,11 @@ nav {
 
 .summary__value--in,
 .summary__value--interest {
-  color: #66c873;
+  color: #fff;
 }
 
 .summary__value--out {
-  color: #f5465d;
+  color: #fff;
 }
 
 .btn--sort {
@@ -204,6 +210,7 @@ nav {
   font-size: 1.3rem;
   font-weight: 500;
   cursor: pointer;
+  color: #fff;
 }
 
 /* OPERATIONS */
@@ -214,15 +221,15 @@ nav {
 }
 
 .operation--transfer {
-  background-image: linear-gradient(to top left, #ffb003, #ffcb03);
+  background-color: #fff;
 }
 
 .operation--loan {
-  background-image: linear-gradient(to top left, #39b385, #9be15d);
+  background-color: #fff;
 }
 
 .operation--close {
-  background-image: linear-gradient(to top left, #e52a5a, #ff585f);
+  background-color: #fff;
 }
 
 h2 {
@@ -256,6 +263,7 @@ h2 {
   font-size: 1.5rem;
   text-align: center;
   color: #333;
+  border: 1px solid #333;
   padding: 0.3rem 1rem;
   border-radius: 0.7rem;
   transition: all 0.3s;
@@ -294,4 +302,21 @@ h2 {
 
 .timer {
   font-weight: 600;
+}
+
+.footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #fff;
+  height: 50px;
+  font-size: 12px;
+}
+
+.footer a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 12px;
 }

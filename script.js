@@ -131,7 +131,7 @@ const displayMovements = (acc, sort = false) => {
       <div class="movements__row">
         <div class="movements__type movements__type--${type}">${i + 1}. ${type}</div>
         <div class="movements__date">${date}</div>
-        <div class="movements__value">${movement.toFixed(2)}€</div>
+        <div class="movements__value">${movement.toFixed(2)}$</div>
       </div>
     `
     containerMovements.insertAdjacentHTML("afterbegin", html)
@@ -147,7 +147,7 @@ const displayMovements = (acc, sort = false) => {
 const accBalance = (acc) => {
   const sum = acc.movements.reduce((a, b) => a + b, 0)
   acc.balance = sum;
-  labelBalance.innerText = `${sum.toFixed(2)}€`
+  labelBalance.innerText = `${sum.toFixed(2)}$`
 }
 
 /*--------------------------------------------------------------------------------------*/
@@ -166,8 +166,8 @@ const calcAccSummary = (acc) => {
     .filter(num => num < 0)
     .reduce((a, b) => a + b, 0)
 
-  labelSumIn.innerText = `${income.toFixed(2)}€`
-  labelSumOut.innerText = `${outcome.toFixed(2)}€`
+  labelSumIn.innerText = `${income.toFixed(2)}$`
+  labelSumOut.innerText = `${outcome.toFixed(2)}$`
 
   // 1.2% interest is given to every deposit (as long as interest is >= to 1 euro) 
   const interest = movements
@@ -176,7 +176,7 @@ const calcAccSummary = (acc) => {
     .filter(num => num >= 1)
     .reduce((a, b) => a + b, 0)
 
-  labelSumInterest.innerText = `${interest.toFixed(2)}€`
+  labelSumInterest.innerText = `${interest.toFixed(2)}$`
 
 }
 
@@ -184,6 +184,9 @@ const calcAccSummary = (acc) => {
 /*--------------------------------------------------------------------------------------*/
 /* Login
 ----------------------------------------------------------------------------------------*/
+
+let currentAccount, timer;
+
 
 const updateUI = (acc) => {
 
@@ -197,14 +200,34 @@ const updateUI = (acc) => {
   calcAccSummary(acc)
 }
 
-let currentAccount;
+const startLogoutTimer = () => {
+  let time = 300;
 
-/*-------------------------------------------------------*/
-/* FAKE login
----------------------------------------------------------*/
-currentAccount = account1;
-updateUI(currentAccount);
-containerApp.style.opacity = 100;
+  const tick = () => {
+
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = String(time % 60).padStart(2, 0);
+
+    labelTimer.innerHTML = `${min}:${sec}`;
+
+    if (time === 0) {
+      labelWelcome.innerText = `Log in to get started`
+      containerApp.style.opacity = 0;
+
+      clearInterval(timer)
+    }
+
+    time--;
+
+  }
+  tick()
+
+  const timerFunc = setInterval(tick, 1000);
+
+  return timerFunc
+}
+
+
 
 
 btnLogin.addEventListener("click", function (e) {
@@ -227,7 +250,7 @@ btnLogin.addEventListener("click", function (e) {
     // Current date and time
     const now = new Date()
 
-    
+
     /*--------------------------------------------*/
     /* New Way (with internationalization and Intl API)
     ----------------------------------------------*/
@@ -258,6 +281,14 @@ btnLogin.addEventListener("click", function (e) {
 
     //Clear input fields
     inputLoginUsername.value = inputLoginPin.value = "";
+
+
+    if (timer) {
+      clearInterval(timer)
+    }
+
+    timer = startLogoutTimer()
+
 
     updateUI(currentAccount)
 
@@ -316,6 +347,10 @@ btnTransfer.addEventListener("click", function (e) {
 
   inputTransferTo.value = inputTransferAmount.value = "";
 
+
+  clearInterval(timer)
+  timer = startLogoutTimer()
+
 })
 
 /*--------------------------------------------------------------------------------------*/
@@ -369,6 +404,9 @@ btnLoan.addEventListener("click", function (e) {
 
 
     inputLoanAmount.value = ""
+
+    clearInterval(timer)
+    timer = startLogoutTimer()
   }
 })
 
