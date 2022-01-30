@@ -10,6 +10,7 @@ html {
 }
 
 body {
+  position: relative;
   font-family: "Poppins", sans-serif;
   color: #fff;
   background: rgb(131, 58, 180);
@@ -97,8 +98,27 @@ nav {
   gap: 2rem;
 
   /* NOTE This creates the fade in/out anumation */
-  /* opacity: 0; */
+  /* display: none; */
+  opacity: 0;
   transition: all 1s;
+}
+
+.note {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  font-size: 1.3rem;
+  color: #333;
+  border-radius: 1rem;
+  padding: 3rem 4rem;
+}
+.note-accounts--acc{
+  padding: 3rem;
+}
+.note-accounts--acc:last-child{
+  padding-top: 0;
 }
 
 .balance {

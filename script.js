@@ -30,6 +30,9 @@ const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
 
+const note = document.querySelector('.note');
+
+
 /*--------------------------------------------------------------------------------------*/
 /* Account
 ----------------------------------------------------------------------------------------*/
@@ -190,7 +193,7 @@ class App {
 
       this.timer = this.startLogoutTimer()
 
-
+      note.style.display = 'none';
       this.updateUI(this.currentAccount)
 
     } else {
